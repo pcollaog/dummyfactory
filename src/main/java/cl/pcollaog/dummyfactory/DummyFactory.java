@@ -58,6 +58,10 @@ public class DummyFactory {
 		} else if (clazz.equals(Short.class)) {
 			obj = clazz.getMethod(VALUE_OF, short.class).invoke(null,
 					(short) random.nextInt(Short.MAX_VALUE + 1));
+		} else if (clazz.equals(Byte.class)) {
+			byte[] bytes = new byte[1];
+			random.nextBytes(bytes);
+			obj = clazz.getMethod(VALUE_OF, byte.class).invoke(null, bytes[0]);
 		} else if (clazz.equals(String.class)) {
 			obj = clazz.getMethod(VALUE_OF, Object.class).invoke(null,
 					UUID.randomUUID());
