@@ -2,6 +2,7 @@ package cl.pcollaog.dummyfactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,9 @@ public class DummyFactory {
 		} else if (clazz.equals(Boolean.class)) {
 			obj = clazz.getMethod(VALUE_OF, boolean.class).invoke(null,
 					random.nextBoolean());
+		} else if (clazz.equals(String.class)) {
+			obj = clazz.getMethod(VALUE_OF, Object.class).invoke(null,
+					UUID.randomUUID());
 		}
 
 		if (obj != null) {

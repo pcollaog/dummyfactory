@@ -28,4 +28,10 @@ public class DummyFactoryTest {
 		assertNotNull(value);
 	}
 
+	@Test
+	public void testDummyFactoryString() {
+		String value = DummyFactory.createDummy(String.class);
+		assertNotNull(value);
+	}
+
 }
