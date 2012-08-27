@@ -3,6 +3,8 @@ package cl.pcollaog.dummyfactory;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author pcollaog
@@ -10,28 +12,52 @@ import org.junit.Test;
  */
 public class DummyFactoryTest {
 
+	private static Logger logger = LoggerFactory
+			.getLogger(DummyFactoryTest.class);
+
 	@Test
 	public void testDummyFactoryInteger() {
-		Integer value = DummyFactory.createDummy(Integer.class);
+		Class<Integer> type = Integer.class;
+		Integer value = DummyFactory.createDummy(type);
 		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
 	}
 
 	@Test
 	public void testDummyFactoryDouble() {
-		Double value = DummyFactory.createDummy(Double.class);
+		Class<Double> type = Double.class;
+		Double value = DummyFactory.createDummy(type);
 		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
 	}
 
 	@Test
 	public void testDummyFactoryBoolean() {
-		Boolean value = DummyFactory.createDummy(Boolean.class);
+		Class<Boolean> type = Boolean.class;
+		Boolean value = DummyFactory.createDummy(type);
 		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
+	}
+
+	@Test
+	public void testDummyFactoryFloat() {
+		Class<Float> type = Float.class;
+		Float value = DummyFactory.createDummy(type);
+		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
 	}
 
 	@Test
 	public void testDummyFactoryString() {
-		String value = DummyFactory.createDummy(String.class);
+		Class<String> type = String.class;
+		String value = DummyFactory.createDummy(type);
 		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
 	}
 
 }
