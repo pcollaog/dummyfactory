@@ -52,6 +52,15 @@ public class DummyFactoryTest {
 	}
 
 	@Test
+	public void testDummyFactoryShort() {
+		Class<Short> type = Short.class;
+		Short value = DummyFactory.createDummy(type);
+		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
+	}
+
+	@Test
 	public void testDummyFactoryString() {
 		Class<String> type = String.class;
 		String value = DummyFactory.createDummy(type);
