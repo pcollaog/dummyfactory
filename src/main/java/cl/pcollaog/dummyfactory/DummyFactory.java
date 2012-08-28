@@ -55,6 +55,21 @@ public class DummyFactory {
 		} else if (clazz.equals(Float.class)) {
 			obj = clazz.getMethod(VALUE_OF, float.class).invoke(null,
 					random.nextFloat());
+		} else if (clazz.equals(Long.class)) {
+			obj = clazz.getMethod(VALUE_OF, long.class).invoke(null,
+					random.nextLong());
+		} else if (clazz.equals(Short.class)) {
+			obj = clazz.getMethod(VALUE_OF, short.class).invoke(null,
+					(short) random.nextInt(Short.MAX_VALUE + 1));
+		} else if (clazz.equals(Character.class)) {
+			String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+			int index = random.nextInt(alphabet.length());
+			obj = clazz.getMethod(VALUE_OF, char.class).invoke(null,
+					alphabet.charAt(index));
+		} else if (clazz.equals(Byte.class)) {
+			byte[] bytes = new byte[1];
+			random.nextBytes(bytes);
+			obj = clazz.getMethod(VALUE_OF, byte.class).invoke(null, bytes[0]);
 		} else if (clazz.equals(String.class)) {
 			obj = clazz.getMethod(VALUE_OF, Object.class).invoke(null,
 					UUID.randomUUID());

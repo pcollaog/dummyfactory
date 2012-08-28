@@ -52,6 +52,32 @@ public class DummyFactoryTest {
 	}
 
 	@Test
+	public void testDummyFactoryShort() {
+		Class<Short> type = Short.class;
+		Short value = DummyFactory.createDummy(type);
+		assertNotNull(value);
+		logger.info("Type [{}] Value [{}]", type, value);
+	}
+
+	@Test
+	public void testDummyFactoryByte() {
+		Class<Byte> type = Byte.class;
+		Byte value = DummyFactory.createDummy(type);
+		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
+	}
+
+	@Test
+	public void testDummyFactoryCharacter() {
+		Class<Character> type = Character.class;
+		Character value = DummyFactory.createDummy(type);
+		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
+	}
+
+	@Test
 	public void testDummyFactoryString() {
 		Class<String> type = String.class;
 		String value = DummyFactory.createDummy(type);
