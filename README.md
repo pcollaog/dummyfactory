@@ -1,6 +1,10 @@
 dummyfactory
 ============
 
+develop : [![Build Status](https://secure.travis-ci.org/pcollaog/dummyfactory.png?branch=develop)](http://travis-ci.org/pcollaog/dummyfactory)
+master  : [![Build Status](https://secure.travis-ci.org/pcollaog/dummyfactory.png?branch=master)](http://travis-ci.org/pcollaog/dummyfactory)
+
+
 Create instance for dummy objects, for now just support primitive types.
 
 Examples
