@@ -2,6 +2,7 @@ package cl.pcollaog.dummyfactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Random;
 import java.util.UUID;
@@ -73,6 +74,9 @@ public class DummyFactory {
 		} else if (clazz.equals(BigInteger.class)) {
 			obj = clazz.getMethod(VALUE_OF, long.class).invoke(null,
 					random.nextLong());
+		} else if (clazz.equals(BigDecimal.class)) {
+			obj = clazz.getMethod(VALUE_OF, double.class).invoke(null,
+					random.nextDouble());
 		} else if (clazz.equals(Character.class)) {
 			int index = random.nextInt(ALPHABET.length());
 			obj = clazz.getMethod(VALUE_OF, char.class).invoke(null,
