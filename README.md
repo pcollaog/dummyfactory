@@ -49,3 +49,22 @@ Byte
 ```java
 Byte randomValue = DummyFactory.createDummy(Byte.class);
 ```
+
+BigDecimal
+```java
+BigDecimal randomValue = DummyFactory.createDummy(BigDecimal.class);
+```
+
+BigInteger
+```java
+BigInteger randomValue = DummyFactory.createDummy(BigInteger.class);
+```
+
+Support for DTO/JavaBeans
+-------------------------
+
+```java
+MyDTO myDTO = DummyFactory.createDummy(MyDTO.class)
+```
+
+MyDTO must have a default constructor and setter for any attribute.
