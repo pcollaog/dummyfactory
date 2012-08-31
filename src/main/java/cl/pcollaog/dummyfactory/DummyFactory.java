@@ -1,6 +1,9 @@
 package cl.pcollaog.dummyfactory;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Random;
 import java.util.UUID;
 
@@ -13,6 +16,11 @@ import org.slf4j.LoggerFactory;
  */
 public class DummyFactory {
 
+	/**
+	 * 
+	 */
+	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
 	private static Logger logger = LoggerFactory.getLogger(DummyFactory.class);
 
 	private static final String VALUE_OF = "valueOf";
@@ -21,15 +29,17 @@ public class DummyFactory {
 		try {
 			return createNumberInstance(clazz);
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (InvocationTargetException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
+		} catch (InstantiationException e) {
+			logger.error(e.getMessage(), e);
 		}
 		return null;
 	}
@@ -37,7 +47,7 @@ public class DummyFactory {
 	private static <T> T createNumberInstance(Class<T> clazz)
 			throws SecurityException, NoSuchMethodException,
 			IllegalArgumentException, IllegalAccessException,
-			InvocationTargetException {
+			InvocationTargetException, InstantiationException {
 
 		logger.debug("Create Random instance");
 		Random random = new Random();
@@ -61,11 +71,16 @@ public class DummyFactory {
 		} else if (clazz.equals(Short.class)) {
 			obj = clazz.getMethod(VALUE_OF, short.class).invoke(null,
 					(short) random.nextInt(Short.MAX_VALUE + 1));
+		} else if (clazz.equals(BigInteger.class)) {
+			obj = clazz.getMethod(VALUE_OF, long.class).invoke(null,
+					random.nextLong());
+		} else if (clazz.equals(BigDecimal.class)) {
+			obj = clazz.getMethod(VALUE_OF, double.class).invoke(null,
+					random.nextDouble());
 		} else if (clazz.equals(Character.class)) {
-			String alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-			int index = random.nextInt(alphabet.length());
+			int index = random.nextInt(ALPHABET.length());
 			obj = clazz.getMethod(VALUE_OF, char.class).invoke(null,
-					alphabet.charAt(index));
+					ALPHABET.charAt(index));
 		} else if (clazz.equals(Byte.class)) {
 			byte[] bytes = new byte[1];
 			random.nextBytes(bytes);
@@ -73,6 +88,26 @@ public class DummyFactory {
 		} else if (clazz.equals(String.class)) {
 			obj = clazz.getMethod(VALUE_OF, Object.class).invoke(null,
 					UUID.randomUUID());
+		} else {
+			logger.debug("Not primitive type detected");
+
+			obj = clazz.newInstance();
+
+			Method[] methods = clazz.getMethods();
+
+			for (Method method : methods) {
+				if (isSetter(method)) {
+					Class<?>[] typeParameters = method.getParameterTypes();
+
+					logger.debug("typeParameter detected [{}]",
+							typeParameters[0].getName());
+
+					Object value = DummyFactory
+							.createNumberInstance(typeParameters[0]);
+
+					method.invoke(obj, value);
+				}
+			}
 		}
 
 		if (obj != null) {
@@ -86,5 +121,13 @@ public class DummyFactory {
 		logger.debug("Returning null, implement me!");
 
 		return null;
+	}
+
+	public static boolean isSetter(Method method) {
+		if (!method.getName().startsWith("set"))
+			return false;
+		if (method.getParameterTypes().length != 1)
+			return false;
+		return true;
 	}
 }

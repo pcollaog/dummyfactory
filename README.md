@@ -1,6 +1,10 @@
 dummyfactory
 ============
 
+develop : [![Build Status](https://secure.travis-ci.org/pcollaog/dummyfactory.png?branch=develop)](http://travis-ci.org/pcollaog/dummyfactory)
+master  : [![Build Status](https://secure.travis-ci.org/pcollaog/dummyfactory.png?branch=master)](http://travis-ci.org/pcollaog/dummyfactory)
+
+
 Create instance for dummy objects, for now just support primitive types.
 
 Examples
@@ -45,3 +49,22 @@ Byte
 ```java
 Byte randomValue = DummyFactory.createDummy(Byte.class);
 ```
+
+BigDecimal
+```java
+BigDecimal randomValue = DummyFactory.createDummy(BigDecimal.class);
+```
+
+BigInteger
+```java
+BigInteger randomValue = DummyFactory.createDummy(BigInteger.class);
+```
+
+Support for DTO/JavaBeans
+-------------------------
+
+```java
+MyDTO myDTO = DummyFactory.createDummy(MyDTO.class)
+```
+
+MyDTO must have a default constructor and setter for any attribute.

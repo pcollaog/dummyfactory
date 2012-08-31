@@ -2,6 +2,9 @@ package cl.pcollaog.dummyfactory;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,6 +84,24 @@ public class DummyFactoryTest {
 	public void testDummyFactoryString() {
 		Class<String> type = String.class;
 		String value = DummyFactory.createDummy(type);
+		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
+	}
+
+	@Test
+	public void testDummyFactoryBigInteger() {
+		Class<BigInteger> type = BigInteger.class;
+		BigInteger value = DummyFactory.createDummy(type);
+		assertNotNull(value);
+
+		logger.info("Type [{}] Value [{}]", type, value);
+	}
+
+	@Test
+	public void testDummyFactoryBigDecimal() {
+		Class<BigDecimal> type = BigDecimal.class;
+		BigDecimal value = DummyFactory.createDummy(type);
 		assertNotNull(value);
 
 		logger.info("Type [{}] Value [{}]", type, value);
