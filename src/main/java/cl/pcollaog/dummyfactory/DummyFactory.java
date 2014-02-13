@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -15,10 +16,6 @@ import org.slf4j.LoggerFactory;
  * 
  */
 public class DummyFactory {
-
-	/**
-	 * 
-	 */
 	private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 	private static Logger logger = LoggerFactory.getLogger(DummyFactory.class);
@@ -88,6 +85,8 @@ public class DummyFactory {
 		} else if (clazz.equals(String.class)) {
 			obj = clazz.getMethod(VALUE_OF, Object.class).invoke(null,
 					UUID.randomUUID());
+                } else if (clazz.equals(Date.class)){
+                        obj = clazz.newInstance();
 		} else {
 			logger.debug("Not primitive type detected");
 

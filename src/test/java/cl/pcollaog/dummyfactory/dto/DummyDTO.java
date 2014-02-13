@@ -1,5 +1,7 @@
 package cl.pcollaog.dummyfactory.dto;
 
+import java.util.Date;
+
 /**
  * @author pcollaog
  * 
@@ -11,6 +13,8 @@ public class DummyDTO {
 	private Long _dummyLong;
 
 	private Integer _dummyInteger;
+
+        private Date _dummyDate;
 
 	/**
 	 * @return the dummyString
@@ -56,6 +60,14 @@ public class DummyDTO {
 	public final void setDummyInteger(Integer dummyInteger) {
 		_dummyInteger = dummyInteger;
 	}
+
+        public Date getDummyDate(){
+            return _dummyDate;
+        }
+
+        public void setDummyDate(Date dummyDate){
+            _dummyDate = dummyDate;
+        }
 
 	@Override
 	public String toString() {
